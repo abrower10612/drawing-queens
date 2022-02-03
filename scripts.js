@@ -41,8 +41,7 @@ const drawCards = deck_id => {
                 !spades.includes("QUEEN") ||
                 !clubs.includes("QUEEN")
             ) {
-                return drawCards(deck_id);
-                // return timeoutPromise().then(() => drawCards(deck_id));
+                return timeoutPromise().then(() => drawCards(deck_id));
             }
 
             spades.sort((left, right) => { return sortOrder.indexOf(left) - sortOrder.indexOf(right); });
