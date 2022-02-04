@@ -42,8 +42,7 @@ const drawCards = deck_id => {
         })
         .then(() => {
             if (queenCount < 4) {
-                return drawCards(deck_id);
-                // return timeoutPromise().then(() => drawCards(deck_id));
+                return timeoutPromise().then(() => drawCards(deck_id));
             }
 
             spades.sort((left, right) => { return sortOrder.indexOf(left) - sortOrder.indexOf(right); });
