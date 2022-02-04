@@ -1,3 +1,5 @@
+const startBtn = document.getElementById("start-btn");
+const resetBtn = document.getElementById("reset-btn");
 const hearts = [];
 const diamonds = [];
 const spades = [];
@@ -22,6 +24,8 @@ const sortOrder = [
 
 /** draw cards and push queen cards onto suit arrays until all 4 queen cards are drawn */
 const drawCards = deck_id => {
+    document.getElementById("alert").innerHTML = "Drawing cards...";
+    startBtn.style.display = "none";
     fetch(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=2`)
         .then((result) => {
             console.log("drawing cards");
@@ -50,11 +54,36 @@ const drawCards = deck_id => {
             console.log(
                 `SPADES: [${spades.toString().replaceAll(",", ", ")}]\n` +
                 `CLUBS: [${clubs.toString().replaceAll(",", ", ")}]\n` +
-                `HEARTS: [${hearts.toString().replaceAll(",", ", ")}]\n` +
-                `DIAMONDS: [${diamonds.toString().replaceAll(",", ", ")}]\n`
+                `DIAMONDS: [${diamonds.toString().replaceAll(",", ", ")}]\n` +
+                `HEARTS: [${hearts.toString().replaceAll(",", ", ")}]\n`
             );
+
+            document.getElementById("spades").innerHTML = `SPADES: [${spades.toString().replaceAll(",", ", ")}]`
+            document.getElementById("clubs").innerHTML = `CLUBS: [${clubs.toString().replaceAll(",", ", ")}]`
+            document.getElementById("diamonds").innerHTML = `DIAMONDS: [${diamonds.toString().replaceAll(",", ", ")}]`
+            document.getElementById("hearts").innerHTML = `HEARTS: [${hearts.toString().replaceAll(",", ", ")}]`
+            document.getElementById('alert').innerHTML = "All Queen cards have now been drawn."
+            startBtn.innerHTML = "Start"
+            startBtn.style.display = "none"
+            resetBtn.style.display = "block";
         })
         .catch((err) => console.log(err.message));
+}
+
+function reset() {
+    hearts.length = 0;
+    diamonds.length = 0;
+    spades.length = 0;
+    clubs.length = 0;
+    queenCount = 0;
+    resetBtn.style.display = "none";
+    startBtn.style.display = "block";
+
+    document.getElementById("spades").innerHTML = '';
+    document.getElementById("clubs").innerHTML ='';
+    document.getElementById("diamonds").innerHTML = '';
+    document.getElementById("hearts").innerHTML = '';
+    document.getElementById('alert').innerHTML = '';
 }
 
 /** delay each network request by 500ms */
@@ -64,8 +93,10 @@ const timeoutPromise = async () => {
     });
 }
 
-/** upon page load, fetch a new shuffled deck of cards and call the drawCards function */
-fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-    .then((result) => { return result.json() })
-    .then((deck) => { drawCards(deck.deck_id) })
-    .catch((err) => console.log(err.message));
+/** once start button is pressed, fetch a new shuffled deck of cards and call the drawCards function */
+function start() {
+    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+        .then((result) => { return result.json() })
+        .then((deck) => { drawCards(deck.deck_id) })
+        .catch((err) => console.log(err.message));
+}
