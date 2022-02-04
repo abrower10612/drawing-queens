@@ -2,6 +2,7 @@ const hearts = [];
 const diamonds = [];
 const spades = [];
 const clubs = [];
+let queenCount = 0;
 
 const sortOrder = [
     "ACE",
@@ -32,16 +33,13 @@ const drawCards = deck_id => {
                 if (card.suit === "DIAMONDS") diamonds.push(card.value);
                 if (card.suit === "SPADES") spades.push(card.value);
                 if (card.suit === "CLUBS") clubs.push(card.value);
+                if (card.value === "QUEEN") queenCount++;
             });
         })
         .then(() => {
-            if (
-                !hearts.includes("QUEEN") ||
-                !diamonds.includes("QUEEN") ||
-                !spades.includes("QUEEN") ||
-                !clubs.includes("QUEEN")
-            ) {
-                return timeoutPromise().then(() => drawCards(deck_id));
+            if (queenCount < 4) {
+                return drawCards(deck_id);
+                // return timeoutPromise().then(() => drawCards(deck_id));
             }
 
             spades.sort((left, right) => { return sortOrder.indexOf(left) - sortOrder.indexOf(right); });
