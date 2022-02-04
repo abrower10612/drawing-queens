@@ -64,7 +64,7 @@ const drawCards = deck_id => {
             document.getElementById('alert').innerHTML = "All Queen cards have now been drawn."
             startBtn.innerHTML = "Start"
             startBtn.style.display = "none"
-            resetBtn.style.display = "block";
+            resetBtn.style.display = "flex";
         })
         .catch((err) => console.log(err.message));
 }
