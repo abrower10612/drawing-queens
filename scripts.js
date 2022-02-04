@@ -76,7 +76,7 @@ function reset() {
     clubs.length = 0;
     queenCount = 0;
     resetBtn.style.display = "none";
-    startBtn.style.display = "block";
+    startBtn.style.display = "flex";
 
     document.getElementById("spades").innerHTML = '';
     document.getElementById("clubs").innerHTML ='';

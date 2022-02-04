@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>Drawing Queens</title>
 </head>
 <body>
-    <h1>Drawning Queens</h1>
+    <h1>Drawing Queens</h1>
     <p>Pressing start will begin utilizing the <a href="https://deckofcardsapi.com/" target="_blank">Deck of Cards API</a> to draw 2 cards repeatedly from a standard 52-card deck until each suit's Queen card is drawn.</p>
     <h3 id="alert"></h3>
-    <button id="start-btn" onClick="start()">Start</button>
+    <div id="start-btn" onClick="start()">Start</div>
     <button id="reset-btn" onClick="reset()" style="display: none; margin-bottom: 10px">Reset</button>
     <div id="spades"></div>
     <div id="clubs"></div>
